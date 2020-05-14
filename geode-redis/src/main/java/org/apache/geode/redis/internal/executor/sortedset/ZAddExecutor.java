@@ -24,7 +24,6 @@ import org.apache.geode.redis.internal.Coder;
 import org.apache.geode.redis.internal.Command;
 import org.apache.geode.redis.internal.DoubleWrapper;
 import org.apache.geode.redis.internal.ExecutionHandlerContext;
-import org.apache.geode.redis.internal.RedisConstants.ArityDef;
 import org.apache.geode.redis.internal.RedisDataType;
 
 public class ZAddExecutor extends SortedSetExecutor {
@@ -35,11 +34,6 @@ public class ZAddExecutor extends SortedSetExecutor {
   @Override
   public void executeCommand(Command command, ExecutionHandlerContext context) {
     List<byte[]> commandElems = command.getProcessedCommand();
-
-    if (commandElems.size() < 4 || commandElems.size() % 2 == 1) {
-      command.setResponse(Coder.getErrorResponse(context.getByteBufAllocator(), ArityDef.ZADD));
-      return;
-    }
 
     ByteArrayWrapper key = command.getKey();
     int numberOfAdds = 0;

@@ -27,7 +27,7 @@ import org.apache.geode.redis.internal.RedisConstants.ArityDef;
 import org.apache.geode.redis.internal.RedisDataType;
 import org.apache.geode.redis.internal.RegionProvider;
 
-public class ExpireAtExecutor extends AbstractExecutor implements Extendable {
+public class ExpireAtExecutor extends AbstractExecutor {
 
   @Override
   public void executeCommand(Command command, ExecutionHandlerContext context) {
@@ -36,13 +36,6 @@ public class ExpireAtExecutor extends AbstractExecutor implements Extendable {
     int NOT_SET = 0;
     int TIMESTAMP_INDEX = 2;
 
-    if (commandElems.size() != 3) {
-      command.setResponse(
-          Coder.getErrorResponse(
-              context.getByteBufAllocator(),
-              getArgsError()));
-      return;
-    }
     RegionProvider regionProvider = context.getRegionProvider();
     ByteArrayWrapper wKey = command.getKey();
 
@@ -97,11 +90,6 @@ public class ExpireAtExecutor extends AbstractExecutor implements Extendable {
 
   protected boolean timeUnitMillis() {
     return false;
-  }
-
-  @Override
-  public String getArgsError() {
-    return ArityDef.EXPIREAT;
   }
 
 }

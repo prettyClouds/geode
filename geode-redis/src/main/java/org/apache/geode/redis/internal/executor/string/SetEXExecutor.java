@@ -21,11 +21,9 @@ import org.apache.geode.redis.internal.ByteArrayWrapper;
 import org.apache.geode.redis.internal.Coder;
 import org.apache.geode.redis.internal.Command;
 import org.apache.geode.redis.internal.ExecutionHandlerContext;
-import org.apache.geode.redis.internal.Extendable;
-import org.apache.geode.redis.internal.RedisConstants.ArityDef;
 import org.apache.geode.redis.internal.executor.AbstractExecutor;
 
-public class SetEXExecutor extends StringExecutor implements Extendable {
+public class SetEXExecutor extends StringExecutor {
 
   private final String ERROR_SECONDS_NOT_A_NUMBER =
       "The expiration argument provided was not a number";
@@ -42,10 +40,6 @@ public class SetEXExecutor extends StringExecutor implements Extendable {
 
     Region<ByteArrayWrapper, ByteArrayWrapper> r = context.getRegionProvider().getStringsRegion();
 
-    if (commandElems.size() < 4) {
-      command.setResponse(Coder.getErrorResponse(context.getByteBufAllocator(), getArgsError()));
-      return;
-    }
 
     ByteArrayWrapper key = command.getKey();
     byte[] value = commandElems.get(VALUE_INDEX);
@@ -82,10 +76,4 @@ public class SetEXExecutor extends StringExecutor implements Extendable {
   protected boolean timeUnitMillis() {
     return false;
   }
-
-  @Override
-  public String getArgsError() {
-    return ArityDef.SETEX;
-  }
-
 }

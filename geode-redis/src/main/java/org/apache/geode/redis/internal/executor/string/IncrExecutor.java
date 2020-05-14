@@ -14,7 +14,6 @@
  */
 package org.apache.geode.redis.internal.executor.string;
 
-import java.util.List;
 
 import org.apache.geode.cache.Region;
 import org.apache.geode.cache.TimeoutException;
@@ -24,21 +23,13 @@ import org.apache.geode.redis.internal.Coder;
 import org.apache.geode.redis.internal.Command;
 import org.apache.geode.redis.internal.ExecutionHandlerContext;
 import org.apache.geode.redis.internal.RedisConstants;
-import org.apache.geode.redis.internal.RedisConstants.ArityDef;
 
 public class IncrExecutor extends StringExecutor {
   private final int INIT_VALUE_INT = 1;
 
   @Override
   public void executeCommand(Command command, ExecutionHandlerContext context) {
-    List<byte[]> commandElems = command.getProcessedCommand();
     long value;
-
-
-    if (commandElems.size() != 2) {
-      command.setResponse(Coder.getErrorResponse(context.getByteBufAllocator(), ArityDef.INCR));
-      return;
-    }
 
     Region<ByteArrayWrapper, ByteArrayWrapper> region =
         context.getRegionProvider().getStringsRegion();

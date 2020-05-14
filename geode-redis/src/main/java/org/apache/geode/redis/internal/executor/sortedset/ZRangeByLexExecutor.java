@@ -34,7 +34,6 @@ import org.apache.geode.redis.internal.Coder;
 import org.apache.geode.redis.internal.Command;
 import org.apache.geode.redis.internal.DoubleWrapper;
 import org.apache.geode.redis.internal.ExecutionHandlerContext;
-import org.apache.geode.redis.internal.RedisConstants.ArityDef;
 import org.apache.geode.redis.internal.RedisDataType;
 import org.apache.geode.redis.internal.executor.SortedSetQuery;
 
@@ -50,12 +49,6 @@ public class ZRangeByLexExecutor extends SortedSetExecutor {
   @Override
   public void executeCommand(Command command, ExecutionHandlerContext context) {
     List<byte[]> commandElems = command.getProcessedCommand();
-
-    if (commandElems.size() < 4) {
-      command
-          .setResponse(Coder.getErrorResponse(context.getByteBufAllocator(), ArityDef.ZRANGEBYLEX));
-      return;
-    }
 
     boolean existsLimit = false;
 

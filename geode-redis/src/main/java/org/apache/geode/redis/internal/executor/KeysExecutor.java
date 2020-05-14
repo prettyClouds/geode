@@ -33,10 +33,6 @@ public class KeysExecutor extends AbstractExecutor {
   @Override
   public void executeCommand(Command command, ExecutionHandlerContext context) {
     List<byte[]> commandElems = command.getProcessedCommand();
-    if (commandElems.size() < 2) {
-      command.setResponse(Coder.getErrorResponse(context.getByteBufAllocator(), ArityDef.KEYS));
-      return;
-    }
 
     String glob = Coder.bytesToString(commandElems.get(1));
     Set<String> allKeys = context.getKeyRegistrar().keys();

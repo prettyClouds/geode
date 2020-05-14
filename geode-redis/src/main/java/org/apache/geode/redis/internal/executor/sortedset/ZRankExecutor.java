@@ -24,21 +24,14 @@ import org.apache.geode.redis.internal.Coder;
 import org.apache.geode.redis.internal.Command;
 import org.apache.geode.redis.internal.DoubleWrapper;
 import org.apache.geode.redis.internal.ExecutionHandlerContext;
-import org.apache.geode.redis.internal.Extendable;
-import org.apache.geode.redis.internal.RedisConstants.ArityDef;
 import org.apache.geode.redis.internal.RedisDataType;
 import org.apache.geode.redis.internal.executor.SortedSetQuery;
 
-public class ZRankExecutor extends SortedSetExecutor implements Extendable {
+public class ZRankExecutor extends SortedSetExecutor {
 
   @Override
   public void executeCommand(Command command, ExecutionHandlerContext context) {
     List<byte[]> commandElems = command.getProcessedCommand();
-
-    if (commandElems.size() < 3) {
-      command.setResponse(Coder.getErrorResponse(context.getByteBufAllocator(), getArgsError()));
-      return;
-    }
 
     ByteArrayWrapper key = command.getKey();
 
@@ -89,10 +82,4 @@ public class ZRankExecutor extends SortedSetExecutor implements Extendable {
   protected boolean isReverse() {
     return false;
   }
-
-  @Override
-  public String getArgsError() {
-    return ArityDef.ZRANK;
-  }
-
 }

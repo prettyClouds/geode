@@ -21,7 +21,6 @@ import org.apache.geode.redis.internal.ByteArrayWrapper;
 import org.apache.geode.redis.internal.Coder;
 import org.apache.geode.redis.internal.Command;
 import org.apache.geode.redis.internal.ExecutionHandlerContext;
-import org.apache.geode.redis.internal.RedisConstants.ArityDef;
 
 public class IncrByExecutor extends StringExecutor {
 
@@ -39,11 +38,6 @@ public class IncrByExecutor extends StringExecutor {
     List<byte[]> commandElems = command.getProcessedCommand();
 
     Region<ByteArrayWrapper, ByteArrayWrapper> r = context.getRegionProvider().getStringsRegion();
-
-    if (commandElems.size() < 3) {
-      command.setResponse(Coder.getErrorResponse(context.getByteBufAllocator(), ArityDef.INCRBY));
-      return;
-    }
 
     ByteArrayWrapper key = command.getKey();
     checkAndSetDataType(key, context);

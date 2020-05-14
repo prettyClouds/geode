@@ -25,7 +25,6 @@ import org.apache.geode.redis.internal.ByteArrayWrapper;
 import org.apache.geode.redis.internal.Coder;
 import org.apache.geode.redis.internal.Command;
 import org.apache.geode.redis.internal.ExecutionHandlerContext;
-import org.apache.geode.redis.internal.RedisConstants.ArityDef;
 import org.apache.geode.redis.internal.RedisDataTypeMismatchException;
 
 public class MSetExecutor extends StringExecutor {
@@ -35,12 +34,6 @@ public class MSetExecutor extends StringExecutor {
   @Override
   public void executeCommand(Command command, ExecutionHandlerContext context) {
     List<byte[]> commandElems = command.getProcessedCommand();
-
-
-    if (commandElems.size() < 3 || commandElems.size() % 2 == 0) {
-      command.setResponse(Coder.getErrorResponse(context.getByteBufAllocator(), ArityDef.MSET));
-      return;
-    }
 
     Region<ByteArrayWrapper, ByteArrayWrapper> region =
         context.getRegionProvider().getStringsRegion();

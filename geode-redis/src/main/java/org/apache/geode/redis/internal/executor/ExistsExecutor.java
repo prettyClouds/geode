@@ -27,10 +27,6 @@ public class ExistsExecutor extends AbstractExecutor {
   @Override
   public void executeCommand(Command command, ExecutionHandlerContext context) {
     List<ByteArrayWrapper> commandElems = command.getProcessedCommandWrappers();
-    if (commandElems.size() < 2) {
-      command.setResponse(Coder.getErrorResponse(context.getByteBufAllocator(), ArityDef.EXISTS));
-      return;
-    }
 
     long existsCount = commandElems
         .subList(1, commandElems.size())

@@ -13,24 +13,20 @@
  * the License.
  */
 
-package org.apache.geode.redis.internal.ParameterRequirements;
+package org.apache.geode.redis.internal;
 
-import org.apache.geode.redis.internal.Command;
-import org.apache.geode.redis.internal.ExecutionHandlerContext;
+import org.apache.geode.redis.internal.ParameterRequirements.ParameterRequirements;
+import org.apache.geode.redis.internal.ParameterRequirements.RedisParametersMismatchException;
 
-public class MultipleParameterRequirements implements ParameterRequirements {
-  private final ParameterRequirements parameterRequirements;
-  private final ParameterRequirements moreRequirements;
-
-  public MultipleParameterRequirements(
-      ParameterRequirements parameterRequirements, ParameterRequirements moreRequirements) {
-    this.parameterRequirements = parameterRequirements;
-    this.moreRequirements = moreRequirements;
-  }
-
+public class OddParameterRequirements implements ParameterRequirements {
   @Override
   public void checkParameters(Command command, ExecutionHandlerContext executionHandlerContext) {
-    this.moreRequirements.checkParameters(command, executionHandlerContext);
-    this.parameterRequirements.checkParameters(command, executionHandlerContext);
+    if (!isOdd(command.getProcessedCommand().size())) {
+      throw new RedisParametersMismatchException(command.wrongNumberOfArgumentsError());
+    }
+  }
+
+  private boolean isOdd(int n) {
+    return n % 2 == 1;
   }
 }

@@ -14,7 +14,6 @@
  */
 package org.apache.geode.redis.internal.executor.sortedset;
 
-import java.util.List;
 
 import org.apache.geode.cache.Region;
 import org.apache.geode.redis.internal.ByteArrayWrapper;
@@ -22,7 +21,6 @@ import org.apache.geode.redis.internal.Coder;
 import org.apache.geode.redis.internal.Command;
 import org.apache.geode.redis.internal.DoubleWrapper;
 import org.apache.geode.redis.internal.ExecutionHandlerContext;
-import org.apache.geode.redis.internal.RedisConstants.ArityDef;
 import org.apache.geode.redis.internal.RedisDataType;
 
 public class ZCardExecutor extends SortedSetExecutor {
@@ -31,13 +29,6 @@ public class ZCardExecutor extends SortedSetExecutor {
 
   @Override
   public void executeCommand(Command command, ExecutionHandlerContext context) {
-    List<byte[]> commandElems = command.getProcessedCommand();
-
-    if (commandElems.size() < 2) {
-      command.setResponse(Coder.getErrorResponse(context.getByteBufAllocator(), ArityDef.ZCARD));
-      return;
-    }
-
     ByteArrayWrapper key = command.getKey();
 
     Region<ByteArrayWrapper, DoubleWrapper> keyRegion = getRegion(context, key);

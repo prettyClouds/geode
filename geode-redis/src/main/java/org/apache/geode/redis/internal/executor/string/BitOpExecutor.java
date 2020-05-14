@@ -21,7 +21,6 @@ import org.apache.geode.redis.internal.ByteArrayWrapper;
 import org.apache.geode.redis.internal.Coder;
 import org.apache.geode.redis.internal.Command;
 import org.apache.geode.redis.internal.ExecutionHandlerContext;
-import org.apache.geode.redis.internal.RedisConstants.ArityDef;
 import org.apache.geode.redis.internal.RedisDataType;
 
 public class BitOpExecutor extends StringExecutor {
@@ -33,11 +32,6 @@ public class BitOpExecutor extends StringExecutor {
     List<byte[]> commandElems = command.getProcessedCommand();
 
     Region<ByteArrayWrapper, ByteArrayWrapper> r = context.getRegionProvider().getStringsRegion();
-
-    if (commandElems.size() < 4) {
-      command.setResponse(Coder.getErrorResponse(context.getByteBufAllocator(), ArityDef.BITOP));
-      return;
-    }
 
     String operation = command.getStringKey().toUpperCase();
     ByteArrayWrapper destKey = new ByteArrayWrapper(commandElems.get(2));

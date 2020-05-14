@@ -33,11 +33,6 @@ public class ScanExecutor extends AbstractScanExecutor {
   public void executeCommand(Command command, ExecutionHandlerContext context) {
     List<byte[]> commandElems = command.getProcessedCommand();
 
-    if (commandElems.size() < 2) {
-      command.setResponse(Coder.getErrorResponse(context.getByteBufAllocator(), ArityDef.SCAN));
-      return;
-    }
-
     String cursorString = command.getStringKey();
     int cursor = 0;
     Pattern matchPattern = null;

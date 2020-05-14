@@ -33,10 +33,6 @@ public class DelExecutor extends AbstractExecutor {
     }
 
     List<byte[]> commandElems = command.getProcessedCommand();
-    if (commandElems.size() < 2) {
-      command.setResponse(Coder.getErrorResponse(context.getByteBufAllocator(), ArityDef.DEL));
-      return;
-    }
 
     int numRemoved = 0;
 

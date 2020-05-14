@@ -31,11 +31,6 @@ public class RenameExecutor extends StringExecutor {
   @Override
   public void executeCommand(Command command, ExecutionHandlerContext context) {
     List<byte[]> commandElems = command.getProcessedCommand();
-    if (commandElems.size() < 3) {
-      command.setResponse(
-          Coder.getErrorResponse(context.getByteBufAllocator(), RedisConstants.ArityDef.KEYS));
-      return;
-    }
 
     ByteArrayWrapper key = command.getKey();
     ByteArrayWrapper newKey = new ByteArrayWrapper(commandElems.get(2));

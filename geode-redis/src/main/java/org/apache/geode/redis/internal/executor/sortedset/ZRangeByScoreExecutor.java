@@ -30,12 +30,10 @@ import org.apache.geode.redis.internal.Coder;
 import org.apache.geode.redis.internal.Command;
 import org.apache.geode.redis.internal.DoubleWrapper;
 import org.apache.geode.redis.internal.ExecutionHandlerContext;
-import org.apache.geode.redis.internal.Extendable;
-import org.apache.geode.redis.internal.RedisConstants.ArityDef;
 import org.apache.geode.redis.internal.RedisDataType;
 import org.apache.geode.redis.internal.executor.SortedSetQuery;
 
-public class ZRangeByScoreExecutor extends SortedSetExecutor implements Extendable {
+public class ZRangeByScoreExecutor extends SortedSetExecutor {
 
   private static final String ERROR_NOT_NUMERIC = "The number provided is not numeric";
 
@@ -44,11 +42,6 @@ public class ZRangeByScoreExecutor extends SortedSetExecutor implements Extendab
   @Override
   public void executeCommand(Command command, ExecutionHandlerContext context) {
     List<byte[]> commandElems = command.getProcessedCommand();
-
-    if (commandElems.size() < 4) {
-      command.setResponse(Coder.getErrorResponse(context.getByteBufAllocator(), getArgsError()));
-      return;
-    }
 
     boolean withScores = false;
     byte[] elem4Array;
@@ -211,10 +204,4 @@ public class ZRangeByScoreExecutor extends SortedSetExecutor implements Extendab
   protected boolean isReverse() {
     return false;
   }
-
-  @Override
-  public String getArgsError() {
-    return ArityDef.ZRANGEBYSCORE;
-  }
-
 }

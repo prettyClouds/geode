@@ -21,7 +21,6 @@ import org.apache.geode.redis.internal.ByteArrayWrapper;
 import org.apache.geode.redis.internal.Coder;
 import org.apache.geode.redis.internal.Command;
 import org.apache.geode.redis.internal.ExecutionHandlerContext;
-import org.apache.geode.redis.internal.RedisConstants.ArityDef;
 
 public class SetNXExecutor extends StringExecutor {
 
@@ -38,10 +37,6 @@ public class SetNXExecutor extends StringExecutor {
     Region<ByteArrayWrapper, ByteArrayWrapper> region =
         context.getRegionProvider().getStringsRegion();
 
-    if (commandElems.size() < 3) {
-      command.setResponse(Coder.getErrorResponse(context.getByteBufAllocator(), ArityDef.SETNX));
-      return;
-    }
 
     ByteArrayWrapper key = command.getKey();
     checkAndSetDataType(key, context);

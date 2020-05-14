@@ -22,9 +22,4 @@ public class PExpireAtExecutor extends ExpireAtExecutor {
   protected boolean timeUnitMillis() {
     return true;
   }
-
-  @Override
-  public String getArgsError() {
-    return ArityDef.PEXPIREAT;
-  }
 }

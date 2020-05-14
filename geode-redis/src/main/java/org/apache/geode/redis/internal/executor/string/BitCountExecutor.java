@@ -22,7 +22,6 @@ import org.apache.geode.redis.internal.Coder;
 import org.apache.geode.redis.internal.Command;
 import org.apache.geode.redis.internal.ExecutionHandlerContext;
 import org.apache.geode.redis.internal.RedisConstants;
-import org.apache.geode.redis.internal.RedisConstants.ArityDef;
 
 public class BitCountExecutor extends StringExecutor {
 
@@ -33,11 +32,6 @@ public class BitCountExecutor extends StringExecutor {
     List<byte[]> commandElems = command.getProcessedCommand();
 
     Region<ByteArrayWrapper, ByteArrayWrapper> r = context.getRegionProvider().getStringsRegion();
-
-    if (commandElems.size() != 2 && commandElems.size() != 4) {
-      command.setResponse(Coder.getErrorResponse(context.getByteBufAllocator(), ArityDef.BITCOUNT));
-      return;
-    }
 
     ByteArrayWrapper key = command.getKey();
     checkAndSetDataType(key, context);

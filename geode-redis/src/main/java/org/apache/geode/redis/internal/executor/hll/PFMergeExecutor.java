@@ -33,11 +33,6 @@ public class PFMergeExecutor extends HllExecutor {
   public void executeCommand(Command command, ExecutionHandlerContext context) {
     List<byte[]> commandElems = command.getProcessedCommand();
 
-    if (commandElems.size() < 3) {
-      command.setResponse(Coder.getErrorResponse(context.getByteBufAllocator(), ArityDef.PFMERGE));
-      return;
-    }
-
     ByteArrayWrapper destKey = command.getKey();
     checkAndSetDataType(destKey, context);
     Region<ByteArrayWrapper, HyperLogLogPlus> keyRegion =

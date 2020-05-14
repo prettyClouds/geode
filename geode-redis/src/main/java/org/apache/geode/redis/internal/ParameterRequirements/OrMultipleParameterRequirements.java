@@ -18,15 +18,33 @@ package org.apache.geode.redis.internal.ParameterRequirements;
 import org.apache.geode.redis.internal.Command;
 import org.apache.geode.redis.internal.ExecutionHandlerContext;
 
-public interface ParameterRequirements {
-  void checkParameters(Command command,
-      ExecutionHandlerContext executionHandlerContext);
+public class OrMultipleParameterRequirements implements ParameterRequirements {
+  private final ParameterRequirements parameterRequirements;
+  private final ParameterRequirements moreRequirements;
 
-  default ParameterRequirements and(ParameterRequirements moreRequirements) {
-    return new AndMultipleParameterRequirements(this, moreRequirements);
+  public OrMultipleParameterRequirements(ParameterRequirements parameterRequirements,
+      ParameterRequirements moreRequirements) {
+
+    this.parameterRequirements = parameterRequirements;
+    this.moreRequirements = moreRequirements;
   }
 
-  default ParameterRequirements or(ParameterRequirements moreRequirements) {
-    return new OrMultipleParameterRequirements(this, moreRequirements);
+  @Override
+  public void checkParameters(Command command, ExecutionHandlerContext context) {
+    Exception e1 = null;
+    Exception e2 = null;
+    try {
+      parameterRequirements.checkParameters(command, context);
+    } catch (Exception e) {
+      e1 = e;
+    }
+    try {
+      moreRequirements.checkParameters(command, context);
+    } catch (Exception e) {
+      e2 = e;
+    }
+    if (e1 != null && e2 != null) {
+      throw new RedisParametersMismatchException(command.wrongNumberOfArgumentsError());
+    }
   }
 }

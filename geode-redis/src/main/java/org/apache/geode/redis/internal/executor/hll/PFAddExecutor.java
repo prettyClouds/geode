@@ -30,11 +30,6 @@ public class PFAddExecutor extends HllExecutor {
   public void executeCommand(Command command, ExecutionHandlerContext context) {
     List<byte[]> commandElems = command.getProcessedCommand();
 
-    if (commandElems.size() < 2) {
-      command.setResponse(Coder.getErrorResponse(context.getByteBufAllocator(), ArityDef.PFADD));
-      return;
-    }
-
     ByteArrayWrapper key = command.getKey();
     checkAndSetDataType(key, context);
     Region<ByteArrayWrapper, HyperLogLogPlus> keyRegion =

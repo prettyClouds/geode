@@ -14,7 +14,6 @@
  */
 package org.apache.geode.redis.internal.executor.sortedset;
 
-import org.apache.geode.redis.internal.RedisConstants.ArityDef;
 
 
 public class ZRevRangeByScoreExecutor extends ZRangeByScoreExecutor {
@@ -22,10 +21,5 @@ public class ZRevRangeByScoreExecutor extends ZRangeByScoreExecutor {
   @Override
   protected boolean isReverse() {
     return true;
-  }
-
-  @Override
-  public String getArgsError() {
-    return ArityDef.ZREVRANGEBYSCORE;
   }
 }

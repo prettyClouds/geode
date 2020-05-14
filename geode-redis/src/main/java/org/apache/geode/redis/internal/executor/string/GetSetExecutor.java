@@ -24,7 +24,6 @@ import org.apache.geode.redis.internal.Coder;
 import org.apache.geode.redis.internal.Command;
 import org.apache.geode.redis.internal.ExecutionHandlerContext;
 import org.apache.geode.redis.internal.RedisConstants;
-import org.apache.geode.redis.internal.RedisConstants.ArityDef;
 import org.apache.geode.redis.internal.RedisDataType;
 
 public class GetSetExecutor extends StringExecutor {
@@ -34,11 +33,6 @@ public class GetSetExecutor extends StringExecutor {
   @Override
   public void executeCommand(Command command, ExecutionHandlerContext context) {
     List<byte[]> commandElems = command.getProcessedCommand();
-
-    if (commandElems.size() != 3) {
-      command.setResponse(Coder.getErrorResponse(context.getByteBufAllocator(), ArityDef.GETSET));
-      return;
-    }
 
     Region<ByteArrayWrapper, ByteArrayWrapper> region =
         context.getRegionProvider().getStringsRegion();

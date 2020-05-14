@@ -21,10 +21,8 @@ import java.util.Map;
 
 import org.apache.geode.cache.Region;
 import org.apache.geode.redis.internal.ByteArrayWrapper;
-import org.apache.geode.redis.internal.Coder;
 import org.apache.geode.redis.internal.Command;
 import org.apache.geode.redis.internal.ExecutionHandlerContext;
-import org.apache.geode.redis.internal.RedisConstants.ArityDef;
 
 public class MGetExecutor extends StringExecutor {
 
@@ -33,11 +31,6 @@ public class MGetExecutor extends StringExecutor {
     List<byte[]> commandElems = command.getProcessedCommand();
 
     Region<ByteArrayWrapper, ByteArrayWrapper> r = context.getRegionProvider().getStringsRegion();
-
-    if (commandElems.size() < 2) {
-      command.setResponse(Coder.getErrorResponse(context.getByteBufAllocator(), ArityDef.MGET));
-      return;
-    }
 
     Collection<ByteArrayWrapper> keys = new ArrayList<ByteArrayWrapper>();
     for (int i = 1; i < commandElems.size(); i++) {

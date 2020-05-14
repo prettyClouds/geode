@@ -23,7 +23,6 @@ import org.apache.geode.redis.internal.ByteArrayWrapper;
 import org.apache.geode.redis.internal.Coder;
 import org.apache.geode.redis.internal.Command;
 import org.apache.geode.redis.internal.ExecutionHandlerContext;
-import org.apache.geode.redis.internal.RedisConstants.ArityDef;
 import org.apache.geode.redis.internal.RedisDataType;
 import org.apache.geode.redis.internal.RedisDataTypeMismatchException;
 
@@ -39,11 +38,6 @@ public class MSetNXExecutor extends StringExecutor {
 
     Region<ByteArrayWrapper, ByteArrayWrapper> region =
         context.getRegionProvider().getStringsRegion();
-
-    if (commandElems.size() < 3 || commandElems.size() % 2 == 0) {
-      command.setResponse(Coder.getErrorResponse(context.getByteBufAllocator(), ArityDef.MSETNX));
-      return;
-    }
 
     boolean hasEntry = false;
 

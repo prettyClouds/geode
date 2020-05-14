@@ -125,46 +125,6 @@ public class RedisConstants {
         "The wrong number of arguments or syntax was provided, the format for the PFMERGE command is \"PFMERGE destkey sourcekey [sourcekey ...]\"";
 
     /*
-     * Sorted set
-     */
-    public static final String ZADD =
-        "The wrong number of arguments or syntax was provided, the format for the ZADD command is \"ZADD key score member [score member ...]\", or not every score matches to a member";
-    public static final String ZCARD =
-        "The wrong number of arguments or syntax was provided, the format for the ZCARD command is \"ZCARD key\"";
-    public static final String ZCOUNT =
-        "The wrong number of arguments or syntax was provided, the format for the ZCOUNT command is \"ZCOUNT key min max\"";
-    public static final String ZINCRBY =
-        "The wrong number of arguments or syntax was provided, the format for the ZINCRBY command is \"ZINCRBY key increment member\"";
-    public static final String ZLEXCOUNT =
-        "The wrong number of arguments or syntax was provided, the format for the ZLEXCOUNT command is \"ZLEXCOUNT key min max\"";
-    public static final String ZRANGEBYLEX =
-        "The wrong number of arguments or syntax was provided, the format for the ZRANGEBYLEX command is \"ZRANGEBYLEX key min max [LIMIT offset count]\"";
-    public static final String ZRANGEBYSCORE =
-        "The wrong number of arguments or syntax was provided, the format for the ZRANGEBYSCORE command is \"ZRANGEBYSCORE key min max [WITHSCORES] [LIMIT offset count]\"";
-    public static final String ZRANGE =
-        "The wrong number of arguments or syntax was provided, the format for the ZRANGE command is \"ZRANGE key start stop [WITHSCORES]\"";
-    public static final String ZRANK =
-        "The wrong number of arguments or syntax was provided, the format for the ZRANK command is \"ZRANK key member\"";
-    public static final String ZREM =
-        "The wrong number of arguments or syntax was provided, the format for the ZREM command is \"ZREM key member [member ...]\"";
-    public static final String ZREMRANGEBYLEX =
-        "The wrong number of arguments or syntax was provided, the format for the ZREMRANGEBYLEX command is \"ZREMRANGEBYLEX key min max\"";
-    public static final String ZREMRANGEBYRANK =
-        "The wrong number of arguments or syntax was provided, the format for the ZREMRANGEBYRANK command is \"ZREMRANGEBYRANK key start stop\"";
-    public static final String ZREMRANGEBYSCORE =
-        "The wrong number of arguments or syntax was provided, the format for the ZREMRANGEBYSCORE command is \"ZREMRANGEBYSCORE key min max\"";
-    public static final String ZREVRANGEBYSCORE =
-        "The wrong number of arguments or syntax was provided, the format for the ZREVRANGEBYSCORE command is \"ZREVRANGEBYSCORE key max min [WITHSCORES] [LIMIT offset count]\"";
-    public static final String ZREVRANGE =
-        "The wrong number of arguments or syntax was provided, the format for the ZREVRANGE command is \"ZREVRANGE key start stop [WITHSCORES]\"";
-    public static final String ZREVRANK =
-        "The wrong number of arguments or syntax was provided, the format for the ZREVRANK command is \"ZREVRANK key member\"";
-    public static final String ZSCAN =
-        "The wrong number of arguments or syntax was provided, the format for the SSCAN command is \"SSCAN key cursor [MATCH pattern] [COUNT count]\"";
-    public static final String ZSCORE =
-        "The wrong number of arguments or syntax was provided, the format for the ZSCORE command is \"ZSCORE key member\"";
-
-    /*
      * Geospatial
      */
     public static final String GEOADD =
@@ -183,54 +143,8 @@ public class RedisConstants {
     /*
      * String
      */
-    public static final String APPEND =
-        "The wrong number of arguments or syntax was provided, the format for the APPEND command is \"APPEND key value\"";
-    public static final String BITCOUNT =
-        "The wrong number of arguments or syntax was provided, the format for the BITCOUNT command is \"BITCOUNT key [start end]\"";
-    public static final String BITOP =
-        "The wrong number of arguments or syntax was provided, the format for the BITOP command is \"BITOP operation destkey key [key ...]\"";
-    public static final String BITPOS =
-        "The wrong number of arguments or syntax was provided, the format for the BITOPS command is \"BITPOS key bit [start] [end]\"";
-    public static final String DECRBY =
-        "The wrong number of arguments or syntax was provided, the format for the DECRBY command is \"DECRRBY key decrement\"";
-    public static final String DECR =
-        "The wrong number of arguments or syntax was provided, the format for the DECR command is \"DECR key\"";
-    public static final String GETBIT =
-        "The wrong number of arguments or syntax was provided, the format for the GETBIT command is \"GETBIT key offset\"";
-    public static final String GETEXECUTOR =
-        "The wrong number of arguments or syntax was provided, the format for the GET command is \"GET key\"";
-    public static final String GETRANGE =
-        "The wrong number of arguments or syntax was provided, the format for the GETRANGE command is \"GETRANGE key start end\"";
-    public static final String GETSET =
-        "The wrong number of arguments or syntax was provided, the format for the GETSET command is \"GETSET key value\"";
-    public static final String INCRBY =
-        "The wrong number of arguments or syntax was provided, the format for the INCRBY command is \"INCRBY key increment\"";
-    public static final String INCRBYFLOAT =
-        "The wrong number of arguments or syntax was provided, the format for the INCRBY command is \"INCRBY key increment\"";
-    public static final String INCR =
-        "The wrong number of arguments or syntax was provided, the format for the INCR command is \"INCR key\"";
-    public static final String MGET =
-        "The wrong number of arguments or syntax was provided, the format for the MGET command is \"MGET key [key ...]\"";
-    public static final String MSET =
-        "The wrong number of arguments or syntax was provided, the format for the MSET command is \"MSET key value [key value ...]\", or not every key matches a value";
-    public static final String MSETNX =
-        "The wrong number of arguments or syntax was provided, the format for the MSETNX command is \"MSETNX key value [key value ...]\", or not every key matches a value";
-    public static final String PSETEX =
-        "The wrong number of arguments or syntax was provided, the format for the PSETEX command is \"PSETEX key milliseconds value\"";
     public static final String PUBLISH =
         "The wrong number of arguments or syntax was provided, the format for the PUBLISH command is \"PUBLISH channel message\"";
-    public static final String SETBIT =
-        "The wrong number of arguments or syntax was provided, the format for the SETBIT command is \"SETBIT key offset value\"";
-    public static final String SET =
-        "The wrong number of arguments or syntax was provided, the format for the SET command is \"SET key value [EX seconds] [PX milliseconds] [NX|XX]\"";
-    public static final String SETEX =
-        "The wrong number of arguments or syntax was provided, the format for the SETEX command is \"SETEX key seconds value\"";
-    public static final String SETNX =
-        "The wrong number of arguments or syntax was provided, the format for the SETNX command is \"SETNX key value\"";
-    public static final String SETRANGE =
-        "The wrong number of arguments or syntax was provided, the format for the SETRANGE command is \"SETRANGE key offset value\"";
-    public static final String STRLEN =
-        "The wrong number of arguments or syntax was provided, the format for the STRELEN command is \"STRLEN key\"";
 
     /*
      * Transaction

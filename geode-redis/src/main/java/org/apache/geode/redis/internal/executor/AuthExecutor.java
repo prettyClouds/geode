@@ -30,10 +30,6 @@ public class AuthExecutor implements Executor {
   public void executeCommand(Command command, ExecutionHandlerContext context) {
     List<byte[]> commandElems = command.getProcessedCommand();
 
-    if (commandElems.size() < 2) {
-      command.setResponse(Coder.getErrorResponse(context.getByteBufAllocator(), ArityDef.AUTH));
-      return;
-    }
     byte[] password = context.getAuthPassword();
     if (password == null) {
       command.setResponse(

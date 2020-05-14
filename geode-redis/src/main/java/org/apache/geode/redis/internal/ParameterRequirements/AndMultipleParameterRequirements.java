@@ -18,15 +18,19 @@ package org.apache.geode.redis.internal.ParameterRequirements;
 import org.apache.geode.redis.internal.Command;
 import org.apache.geode.redis.internal.ExecutionHandlerContext;
 
-public interface ParameterRequirements {
-  void checkParameters(Command command,
-      ExecutionHandlerContext executionHandlerContext);
+public class AndMultipleParameterRequirements implements ParameterRequirements {
+  private final ParameterRequirements parameterRequirements;
+  private final ParameterRequirements moreRequirements;
 
-  default ParameterRequirements and(ParameterRequirements moreRequirements) {
-    return new AndMultipleParameterRequirements(this, moreRequirements);
+  public AndMultipleParameterRequirements(
+      ParameterRequirements parameterRequirements, ParameterRequirements moreRequirements) {
+    this.parameterRequirements = parameterRequirements;
+    this.moreRequirements = moreRequirements;
   }
 
-  default ParameterRequirements or(ParameterRequirements moreRequirements) {
-    return new OrMultipleParameterRequirements(this, moreRequirements);
+  @Override
+  public void checkParameters(Command command, ExecutionHandlerContext executionHandlerContext) {
+    this.moreRequirements.checkParameters(command, executionHandlerContext);
+    this.parameterRequirements.checkParameters(command, executionHandlerContext);
   }
 }
